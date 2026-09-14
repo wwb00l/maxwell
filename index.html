@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Maxwell is a generalist embodied intelligence model that connects multimodal understanding with continuous robot control through event-adaptive action representations.">
+  <meta name="theme-color" content="#f7f7f3">
+  <title>MAXWELL | Generalist Embodied Intelligence</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳转到主要内容</a>
+
+  <header class="site-header" id="top">
+    <nav class="nav shell" aria-label="主导航">
+      <a class="brand" href="#top" aria-label="Maxwell 首页">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span>MAXWELL</span>
+      </a>
+      <a class="institute-link nav-institute" href="#top" aria-label="中国科学院工业人工智能研究所">
+        <img src="assets/brand/iaii.png" alt="中国科学院工业人工智能研究所">
+      </a>
+      <div class="nav-links" id="navLinks">
+        <a href="#evaluation">MT50 成绩</a>
+        <a href="#architecture">模型架构</a>
+        <a href="#framework">技术框架</a>
+        <a href="#event-adaptive">动态事件</a>
+        <a href="#data">训练数据</a>
+        <a href="#demos">实验演示</a>
+      </div>
+      <div class="nav-actions">
+        <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch to Chinese" title="Switch to Chinese">中文</button>
+        <a class="nav-paper" href="#release-actions">
+          发布信息 <span aria-hidden="true">↓</span>
+        </a>
+        <button class="menu-toggle" type="button" aria-controls="navLinks" aria-expanded="false" aria-label="打开导航" title="导航菜单">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-media" src="assets/media/real-cup.gif" alt="Maxwell 控制机械臂抓取并移动纸杯的真机实验">
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-grid shell">
+        <div class="hero-copy reveal">
+          <p class="eyebrow light">GENERALIST EMBODIED INTELLIGENCE</p>
+          <h1 id="hero-title">MAXWELL</h1>
+          <p class="hero-subtitle">通用具身智能模型</p>
+          <p class="hero-intro">以可变时长事件为动作的基本单元，让视觉、语言与连续控制在一个紧凑模型中协同工作。HEAT 与 Continuous-HEAT 在同一事件动作框架下，以两种接口实现面向机器人操作的精细控制。</p>
+          <div class="hero-release-actions" id="release-actions" aria-label="论文与模型发布信息">
+            <div class="hero-release-item">
+              <a class="button button-primary" href="Hybrid_Event_Adaptive_Action_Representations_for_Robot_Learning.pdf" target="_blank" rel="noreferrer">论文 / 技术报告</a>
+              <small>查看论文 PDF</small>
+            </div>
+            <div class="hero-release-item">
+              <button class="button button-ghost" type="button" disabled>开源代码</button>
+              <small>即将发布</small>
+            </div>
+            <div class="hero-release-item">
+              <button class="button button-ghost" type="button" disabled>模型权重</button>
+              <small>即将发布</small>
+            </div>
+          </div>
+        </div>
+        <div class="hero-facts reveal" aria-label="核心指标">
+          <div><strong>1B</strong><span>完整模型参数规模（含动作头）</span></div>
+          <div><strong>37.99M</strong><span>训练数据帧规模</span></div>
+          <div><strong>92.20%</strong><span>MetaWorld MT50 成功率</span></div>
+        </div>
+      </div>
+      <div class="hero-caption">REAL-WORLD MANIPULATION / PIPER</div>
+    </section>
+
+    <section class="closed section" id="evaluation" aria-labelledby="evaluation-title">
+      <div class="shell">
+        <div class="closed-heading reveal">
+          <div>
+            <p class="eyebrow">METAWORLD MT50 EVALUATION</p>
+            <h2 id="evaluation-title">性能指标打破 MetaWorld 权威榜单纪录</h2>
+          </div>
+          <div class="closed-total">
+            <strong>92.20<small>%</small></strong>
+            <span>总体成功率</span>
+            <small>2305 / 2500 条轨迹成功</small>
+          </div>
+        </div>
+
+        <div class="score-layout">
+          <div class="score-bars reveal" aria-label="MetaWorld 难度分档成功率">
+            <div class="score-row">
+              <div class="score-name"><strong>Easy</strong><span>28 项任务 · 1292 / 1400</span></div>
+              <div class="bar-track"><span style="--score: 92.29%"></span></div>
+              <strong class="score-value">92.29%</strong>
+            </div>
+            <div class="score-row">
+              <div class="score-name"><strong>Medium</strong><span>11 项任务 · 507 / 550</span></div>
+              <div class="bar-track"><span style="--score: 92.18%"></span></div>
+              <strong class="score-value">92.18%</strong>
+            </div>
+            <div class="score-row">
+              <div class="score-name"><strong>Hard</strong><span>6 项任务 · 287 / 300</span></div>
+              <div class="bar-track"><span style="--score: 95.67%"></span></div>
+              <strong class="score-value">95.67%</strong>
+            </div>
+            <div class="score-row">
+              <div class="score-name"><strong>Very Hard</strong><span>5 项任务 · 219 / 250</span></div>
+              <div class="bar-track"><span style="--score: 87.60%"></span></div>
+              <strong class="score-value">87.60%</strong>
+            </div>
+          </div>
+
+          <div class="score-summary reveal">
+            <p>评测覆盖</p>
+            <div><strong>50</strong><span>项任务</span></div>
+            <div><strong>2,500</strong><span>条轨迹</span></div>
+            <div><strong>4</strong><span>档难度</span></div>
+            <small>以上为项目评测数据；榜单表述依据项目所采用的 MetaWorld 公开榜单比较口径。</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="method-overview section method-section" id="method" aria-labelledby="method-title">
+      <div class="shell">
+        <div class="open-title-grid reveal">
+          <div>
+            <p class="eyebrow">SHARED EVENT-ACTION FRAMEWORK</p>
+            <h2 id="method-title">机器人动作，不只是连续数字</h2>
+          </div>
+          <p>一次操作天然由若干持续时间不同的事件构成：接近、接触、抓取、搬运与放置。共享框架先学习事件边界与时长，再由 HEAT 或 Continuous-HEAT 接口保留真实执行所需的连续精度。</p>
+        </div>
+
+        <div class="event-lab-frame reveal" id="event-adaptive" aria-label="动态事件划分交互演示">
+          <iframe src="event-adaptive-demo.html?embed=1" title="动态事件划分交互演示" loading="lazy"></iframe>
+        </div>
+
+        <div class="principles">
+          <article class="principle reveal">
+            <span class="principle-number">01</span>
+            <h3>自适应时序</h3>
+            <p>根据动作变化学习事件边界，把更多表示能力分配给接触与转换阶段，把稳定运动压缩为更长事件。</p>
+          </article>
+          <article class="principle reveal">
+            <span class="principle-number">02</span>
+            <h3>双路径事件接口</h3>
+            <p>HEAT 采用离散 token 与连续残差，Continuous-HEAT 采用连续事件潜变量；二者共享事件语义与持续时间建模。</p>
+          </article>
+          <article class="principle reveal">
+            <span class="principle-number">03</span>
+            <h3>短时域闭环</h3>
+            <p>先预测完整事件计划，再只执行前几个动作并重新观察环境，降低接触误差与环境变化的累积影响。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="architecture section" id="architecture" aria-labelledby="architecture-title">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">MODEL ARCHITECTURE</p>
+          <h2 id="architecture-title">0.8B 主干，1B 完整模型</h2>
+          <p>当前模型以 0.8B 多模态主干承接视觉、语言、机器人状态与本体信息，接入事件接口与动作头后，完整参数规模约为 1B。当前 0.8B 主干采用 Qwen3.5 实现；模型的关键设计位于其上的事件动作接口与连续动作生成模块。<span class="architecture-roadmap">3B 全自研主干版本也即将推出。</span></p>
+        </div>
+
+        <div class="architecture-flow reveal" aria-label="模型参数规模构成">
+          <div class="flow-node backbone-node"><span class="node-label">MULTIMODAL BACKBONE</span><strong>0.8B 多模态主干</strong><small>视觉 · 语言 · 状态 · 本体</small></div>
+          <span class="flow-operator" aria-hidden="true">+</span>
+          <div class="flow-node event-node"><span class="node-label">EVENT + ACTION</span><strong>事件接口与动作头</strong><small>两种事件参数化路线</small></div>
+          <span class="flow-operator" aria-hidden="true">=</span>
+          <div class="flow-node model-total-node"><span class="node-label">FULL MODEL</span><strong>≈ 1B 完整模型</strong><small>包含动作头</small></div>
+        </div>
+
+        <figure class="paper-figure reveal">
+          <div class="figure-bar">
+            <span>HEAT / Continuous-HEAT 共享框架</span>
+            <a href="assets/figures/shared-event-action-framework.png" target="_blank" rel="noreferrer">查看原图 <span aria-hidden="true">↗</span></a>
+          </div>
+          <img src="assets/figures/shared-event-action-framework.png" alt="HEAT 与 Continuous-HEAT 共享的事件自适应动作表征框架，展示事件边界与持续时间学习，以及离散连续和连续潜变量两种策略接口" loading="lazy">
+          <figcaption>两种路线先共享可变时长事件语义，再在面向策略的接口层分化：HEAT 使用 FSQ token、有界连续残差与时长；Continuous-HEAT 使用连续事件潜变量与时长，并衔接 Flow Matching 动作头。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="framework-intro section" id="framework" aria-labelledby="framework-title">
+      <div class="shell">
+        <div class="section-heading split-heading reveal">
+          <div>
+            <p class="eyebrow">ONE FRAMEWORK / TWO INTERFACES</p>
+            <h2 id="framework-title">一个事件动作框架，两种实现路线</h2>
+          </div>
+          <p>两种路线共享事件语义与持续时间建模，只在面向策略的事件接口上采用不同参数化方式，并共同服务于紧凑表征、多任务泛化与闭环控制。</p>
+        </div>
+
+        <div class="framework-core reveal">
+          <div class="framework-core-copy">
+            <span class="framework-label">SHARED EVENT-ADAPTIVE CORE</span>
+            <h3>从动作变化中发现可变时长事件</h3>
+            <p>把连续动作块转化为紧凑、具备持续时间感知的控制单元；训练阶段由动作派生教师提供监督，推理阶段只依赖当前多模态观察。</p>
+          </div>
+          <dl class="framework-core-specs">
+            <div><dt>事件内容</dt><dd>紧凑动作语义</dd></div>
+            <div><dt>时间结构</dt><dd>边界 + 显式时长</dd></div>
+            <div><dt>执行机制</dt><dd>短时域闭环</dd></div>
+          </dl>
+        </div>
+
+        <div class="route-connector reveal" aria-hidden="true"></div>
+
+        <div class="route-grid">
+          <article class="route route-heat reveal">
+            <div class="route-topline">
+              <span class="route-index">01</span>
+              <span class="route-label">DISCRETE–CONTINUOUS INTERFACE</span>
+            </div>
+            <h3>HEAT</h3>
+            <p>以 FSQ 离散 token 表达事件身份，以有界连续残差保留度量细节，并显式预测事件持续时间。</p>
+            <div class="route-detail"><span>策略接口</span><strong>离散—连续事件表示</strong></div>
+          </article>
+
+          <article class="route route-continuous reveal">
+            <div class="route-topline">
+              <span class="route-index">02</span>
+              <span class="route-label">CONTINUOUS EVENT LATENT</span>
+            </div>
+            <h3>Continuous-HEAT</h3>
+            <p>保留相同的事件语义与时间抽象，以归一化连续事件潜变量为 Flow Matching 动作生成提供条件。</p>
+            <div class="route-detail"><span>策略接口</span><strong>连续事件潜变量</strong></div>
+          </article>
+        </div>
+
+        <a class="text-link framework-link reveal" href="#architecture">查看统一架构 <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="results section tint-section" aria-labelledby="results-title">
+      <div class="shell">
+        <div class="section-heading split-heading reveal">
+          <div>
+            <p class="eyebrow">CONTINUOUS-HEAT / MATCHED CONTROL</p>
+            <h2 id="results-title">事件条件带来稳定增益</h2>
+          </div>
+          <p>每组实验都保持数据、骨干、优化器、流积分步数与执行时域一致。</p>
+        </div>
+
+        <div class="comparison-grid reveal" aria-label="HEAT 与 No HEAT 成功率对照">
+          <article class="comparison-card">
+            <header><span>LIBERO</span><small>CPT 阶段</small></header>
+            <div class="heat-pair">
+              <div><span>NO HEAT</span><strong>62.20%</strong></div>
+              <span class="pair-arrow" aria-hidden="true">→</span>
+              <div class="with-heat"><span>C-HEAT</span><strong>68.87%</strong></div>
+            </div>
+            <footer><span>绝对增益</span><strong>+6.67 pp</strong></footer>
+          </article>
+          <article class="comparison-card largest-gain">
+            <header><span>LIBERO</span><small>SFT 阶段</small></header>
+            <div class="heat-pair">
+              <div><span>NO HEAT</span><strong>52.16%</strong></div>
+              <span class="pair-arrow" aria-hidden="true">→</span>
+              <div class="with-heat"><span>C-HEAT</span><strong>87.89%</strong></div>
+            </div>
+            <footer><span>最大绝对增益</span><strong>+35.74 pp</strong></footer>
+          </article>
+          <article class="comparison-card">
+            <header><span>MetaWorld</span><small>CPT 阶段</small></header>
+            <div class="heat-pair">
+              <div><span>NO HEAT</span><strong>7.32%</strong></div>
+              <span class="pair-arrow" aria-hidden="true">→</span>
+              <div class="with-heat"><span>C-HEAT</span><strong>12.64%</strong></div>
+            </div>
+            <footer><span>绝对增益</span><strong>+5.32 pp</strong></footer>
+          </article>
+          <article class="comparison-card">
+            <header><span>MetaWorld</span><small>SFT 阶段</small></header>
+            <div class="heat-pair">
+              <div><span>NO HEAT</span><strong>43.92%</strong></div>
+              <span class="pair-arrow" aria-hidden="true">→</span>
+              <div class="with-heat"><span>C-HEAT</span><strong>54.60%</strong></div>
+            </div>
+            <footer><span>绝对增益</span><strong>+10.68 pp</strong></footer>
+          </article>
+        </div>
+
+        <figure class="chart-figure reveal">
+          <img src="assets/figures/heat-vs-noheat.svg" alt="在相同 CPT 或 SFT 训练阶段内，HEAT 与 No HEAT 在 LIBERO 和 MetaWorld 上的成功率对比" loading="lazy">
+          <figcaption>HEAT / No HEAT 匹配消融。这里的 HEAT 表示启用 Continuous-HEAT 事件条件，No HEAT 表示关闭事件通路；结果来自论文所列的单次种子 rollout 评测。</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <section class="discrete-results section" id="discrete-heat" aria-labelledby="discrete-heat-title">
+      <div class="shell">
+        <div class="section-heading split-heading reveal">
+          <div>
+            <p class="eyebrow">DISCRETE HEAT / EVENTFORMER</p>
+            <h2 id="discrete-heat-title">离散 HEAT：更少 token，更高成功率</h2>
+          </div>
+          <p>离散版 HEAT 用 8 个可变时长事件表示 32 帧动作，每个事件由 FSQ token、连续残差与显式时长组成，再由 EventFormer 自回归预测并以短时域闭环执行。</p>
+        </div>
+
+        <div class="benchmark-strip reveal" aria-label="离散 HEAT 基准成功率">
+          <div><span>LIBERO</span><strong>62.3%</strong><small>10 项任务平均</small></div>
+          <div><span>MetaWorld</span><strong>63.9%</strong><small>4 项任务平均</small></div>
+          <div><span>RoboMimic</span><strong>58.1%</strong><small>3 项任务平均</small></div>
+          <p>HEAT EventFormer 在论文列出的三组基准中均达到相应表格的最高平均成功率。</p>
+        </div>
+
+        <div class="comparison-grid discrete-comparison-grid reveal" aria-label="离散 HEAT 与各基准最强对照方法的成功率比较">
+          <article class="comparison-card discrete-heat-card">
+            <header><span>LIBERO</span><small>10 TASKS</small></header>
+            <div class="heat-pair">
+              <div><span>OAT</span><strong>55.7%</strong></div>
+              <span class="pair-arrow" aria-hidden="true">→</span>
+              <div class="with-heat"><span>HEAT</span><strong>62.3%</strong></div>
+            </div>
+            <footer><span>领先最强对照</span><strong>+6.6 pp</strong></footer>
+            <small class="task-highlight">Book / Caddy 任务达到 100.0%</small>
+          </article>
+          <article class="comparison-card discrete-heat-card">
+            <header><span>MetaWorld</span><small>4 TASKS</small></header>
+            <div class="heat-pair">
+              <div><span>VQ-BeT</span><strong>58.8%</strong></div>
+              <span class="pair-arrow" aria-hidden="true">→</span>
+              <div class="with-heat"><span>HEAT</span><strong>63.9%</strong></div>
+            </div>
+            <footer><span>领先最强对照</span><strong>+5.1 pp</strong></footer>
+            <small class="task-highlight">Disassemble 任务达到 89.6%</small>
+          </article>
+          <article class="comparison-card discrete-heat-card largest-gain">
+            <header><span>RoboMimic</span><small>3 TASKS</small></header>
+            <div class="heat-pair">
+              <div><span>VQ-BeT</span><strong>42.5%</strong></div>
+              <span class="pair-arrow" aria-hidden="true">→</span>
+              <div class="with-heat"><span>HEAT</span><strong>58.1%</strong></div>
+            </div>
+            <footer><span>领先最强对照</span><strong>+15.6 pp</strong></footer>
+            <small class="task-highlight">Lift / Can 分别达到 94.4% / 79.8%</small>
+          </article>
+        </div>
+
+        <div class="experiment-evidence">
+          <figure class="heat-experiment-figure reveal">
+            <div class="figure-bar">
+              <span>LIBERO COMPONENT ABLATION</span>
+              <a href="assets/figures/discrete-heat-ablation.png" target="_blank" rel="noreferrer">查看原图 <span aria-hidden="true">↗</span></a>
+            </div>
+            <img src="assets/figures/discrete-heat-ablation.png" alt="离散 HEAT 在 LIBERO 上的组件消融成功率" loading="lazy">
+            <figcaption>完整 HEAT 达到 62.3%。固定事件时长、仅训练 token 或移除动作修正器都会带来明显下降，说明自适应时序与闭环连续修正共同决定最终控制性能。</figcaption>
+          </figure>
+
+          <div class="experiment-notes reveal">
+            <p class="eyebrow">WHAT MATTERS</p>
+            <h3>自适应时长与动作修正不可或缺</h3>
+            <p>消融结果把增益拆到具体组件：离散 token 提供事件身份，连续分支保留度量细节，预测时长与动作修正器负责将紧凑计划可靠地还原为控制轨迹。</p>
+            <dl class="ablation-metrics">
+              <div><dt>固定事件时长</dt><dd><strong>−10.1 pp</strong><span>52.2%</span></dd></div>
+              <div><dt>移除动作修正器</dt><dd><strong>−13.7 pp</strong><span>48.6%</span></dd></div>
+              <div><dt>仅 token 策略</dt><dd><strong>−19.5 pp</strong><span>42.8%</span></dd></div>
+            </dl>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="data section" id="data" aria-labelledby="data-title">
+      <div class="shell">
+        <div class="data-heading reveal">
+          <div>
+            <p class="eyebrow">DATA ENGINE</p>
+            <h2 id="data-title">面向不同机器人与任务的数据底座</h2>
+          </div>
+          <p>训练管线统一整理 16 组 LeRobot v3 数据目录，覆盖不同动作维度、相机数量与采集频率，为视觉语言动作模型提供异构训练语料。</p>
+        </div>
+
+        <div class="data-metrics reveal">
+          <div><strong>16</strong><span>数据目录</span></div>
+          <div><strong>257,875</strong><span>Episodes</span></div>
+          <div><strong>37.99M</strong><span>Frames</span></div>
+          <div><strong>≥185.25GB</strong><span>可读取数据</span></div>
+        </div>
+
+        <div class="dataset-layout">
+          <div class="dataset-copy reveal">
+            <h3>16 组数据，覆盖 9 类来源</h3>
+            <div class="dataset-tags" aria-label="数据集来源">
+              <span>CALVIN</span><span>DROID</span><span>LIBERO</span><span>MetaWorld</span><span>OXE × 7</span><span>RoboMME</span><span>RoboMimic</span><span>RoboCasa</span><span>Piper</span>
+            </div>
+            <dl class="data-specs">
+              <div><dt>动作宽度</dt><dd>4–14 维</dd></div>
+              <div><dt>相机数量</dt><dd>1–4 路</dd></div>
+              <div><dt>采集频率</dt><dd>5–80 Hz</dd></div>
+              <div><dt>平均序列</dt><dd>147.3 帧</dd></div>
+            </dl>
+            <p>OXE 与 RoboCasa 合计占已存储帧数的 88.4%。训练前通过统一 schema 对齐图像、语言、动作、状态与本体描述。</p>
+          </div>
+          <figure class="data-figure reveal">
+            <img src="assets/figures/dataset-distribution.png" alt="16 组训练数据的帧数量与来源占比分布" loading="lazy">
+          </figure>
+        </div>
+
+        <figure class="dataset-samples reveal">
+          <img src="assets/figures/dataset-examples.png" alt="LIBERO、MetaWorld 与 RoboMimic 的第三人称和腕部相机样例" loading="lazy">
+          <figcaption><strong>多视角样例。</strong> 从左至右为 LIBERO、MetaWorld 与 RoboMimic；上排是第三人称视角，下排是腕部视角。</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="demos section dark-section" id="demos" aria-labelledby="demos-title">
+      <div class="shell">
+        <div class="section-heading split-heading reveal">
+          <div>
+            <p class="eyebrow light">ROBOT IN MOTION</p>
+            <h2 id="demos-title">从仿真到真机</h2>
+          </div>
+          <p>操作能力在不同环境中接受验证。真机实验展示视觉条件下的抓取与搬运；仿真任务覆盖接触、路径规划、容器操作与长序列任务。</p>
+        </div>
+
+        <div class="filter-bar reveal" role="group" aria-label="演示筛选">
+          <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">全部</button>
+          <button class="filter-button" type="button" data-filter="real" aria-pressed="false">真机</button>
+          <button class="filter-button" type="button" data-filter="metaworld" aria-pressed="false">MetaWorld</button>
+          <button class="filter-button" type="button" data-filter="libero" aria-pressed="false">LIBERO</button>
+        </div>
+
+        <div class="demo-grid">
+          <figure class="demo-item demo-real demo-portrait reveal" data-group="real">
+            <div class="demo-media"><img src="assets/media/real-blocks.gif" alt="机械臂抓取并搬运彩色积木的真机实验" loading="lazy"></div>
+            <figcaption><span>真机实验 01</span><strong>彩色积木抓取与搬运</strong></figcaption>
+          </figure>
+          <figure class="demo-item demo-real demo-wide reveal" data-group="real">
+            <div class="demo-media"><img src="assets/media/real-cup.gif" alt="机械臂抓取纸杯并移动到目标位置的真机实验" loading="lazy"></div>
+            <figcaption><span>真机实验 02</span><strong>纸杯抓取与定点放置</strong></figcaption>
+          </figure>
+          <figure class="demo-item reveal" data-group="metaworld">
+            <div class="demo-media"><img src="assets/media/metaworld-nut-peg.gif" alt="MetaWorld 螺母套柱仿真任务" loading="lazy"></div>
+            <figcaption><span>MetaWorld</span><strong>螺母套柱</strong></figcaption>
+          </figure>
+          <figure class="demo-item reveal" data-group="metaworld">
+            <div class="demo-media"><img src="assets/media/metaworld-basketball.gif" alt="MetaWorld 抓球入筐仿真任务" loading="lazy"></div>
+            <figcaption><span>MetaWorld</span><strong>抓球入筐</strong></figcaption>
+          </figure>
+          <figure class="demo-item reveal" data-group="metaworld">
+            <div class="demo-media"><img src="assets/media/metaworld-wall-button.gif" alt="MetaWorld 绕过障碍按下按钮仿真任务" loading="lazy"></div>
+            <figcaption><span>MetaWorld</span><strong>绕障按按钮</strong></figcaption>
+          </figure>
+          <figure class="demo-item reveal" data-group="libero">
+            <div class="demo-media"><img src="assets/media/libero-stove-moka.gif" alt="LIBERO 开启炉灶并放置摩卡壶仿真任务" loading="lazy"></div>
+            <figcaption><span>LIBERO</span><strong>开灶放壶</strong></figcaption>
+          </figure>
+          <figure class="demo-item reveal" data-group="libero">
+            <div class="demo-media"><img src="assets/media/libero-mug-microwave.gif" alt="LIBERO 将杯子放入微波炉并关闭炉门仿真任务" loading="lazy"></div>
+            <figcaption><span>LIBERO</span><strong>移杯入微波炉</strong></figcaption>
+          </figure>
+          <figure class="demo-item reveal" data-group="libero">
+            <div class="demo-media"><img src="assets/media/libero-book-caddy.gif" alt="LIBERO 将书本放入收纳盒后部仿真任务" loading="lazy"></div>
+            <figcaption><span>LIBERO</span><strong>书本放入收纳盒</strong></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-grid">
+      <div>
+        <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">M</span><span>MAXWELL</span></a>
+        <p>通用具身智能模型</p>
+      </div>
+      <div class="footer-meta">
+        <span>© <span id="year">2026</span> Maxwell Research</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

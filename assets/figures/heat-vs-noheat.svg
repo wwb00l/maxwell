@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="305" viewBox="0 0 720 305">
+<desc>Matched HEAT versus No HEAT success-rate comparisons within the same CPT or SFT training stage.</desc>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#27323B} .tick{font-size:12px} .label{font-size:12px} .value{font-size:11px} .gain{font-size:12px;font-weight:700;fill:#984B27} .legend{font-size:12px}</style>
+<rect width="720" height="305" fill="#FFFFFF"/>
+<line x1="70" y1="255" x2="706" y2="255" stroke="#D9DEE3" stroke-width="0.8"/>
+<text x="60" y="259" text-anchor="end" class="tick">0</text>
+<line x1="70" y1="212.4" x2="706" y2="212.4" stroke="#D9DEE3" stroke-width="0.8"/>
+<text x="60" y="216.4" text-anchor="end" class="tick">20</text>
+<line x1="70" y1="169.8" x2="706" y2="169.8" stroke="#D9DEE3" stroke-width="0.8"/>
+<text x="60" y="173.8" text-anchor="end" class="tick">40</text>
+<line x1="70" y1="127.2" x2="706" y2="127.2" stroke="#D9DEE3" stroke-width="0.8"/>
+<text x="60" y="131.2" text-anchor="end" class="tick">60</text>
+<line x1="70" y1="84.6" x2="706" y2="84.6" stroke="#D9DEE3" stroke-width="0.8"/>
+<text x="60" y="88.6" text-anchor="end" class="tick">80</text>
+<line x1="70" y1="42" x2="706" y2="42" stroke="#D9DEE3" stroke-width="0.8"/>
+<text x="60" y="46" text-anchor="end" class="tick">100</text>
+<line x1="70" y1="42" x2="70" y2="255" stroke="#6D7882" stroke-width="1"/>
+<line x1="70" y1="255" x2="706" y2="255" stroke="#6D7882" stroke-width="1"/>
+<text transform="translate(18 148.5) rotate(-90)" text-anchor="middle" class="label">Success rate (%)</text>
+<rect x="520" y="10" width="12" height="12" fill="#9AA6B2" stroke="#53616D" stroke-width="0.6"/><text x="538" y="20" class="legend">NO HEAT</text>
+<rect x="620" y="10" width="12" height="12" fill="#D97745" stroke="#984B27" stroke-width="0.6"/><text x="638" y="20" class="legend">HEAT</text>
+<rect x="131" y="122.51978721" width="31" height="132.48021279" fill="#9AA6B2" stroke="#53616D" stroke-width="0.7"/>
+<rect x="168" y="108.30301275" width="31" height="146.69698725" fill="#D97745" stroke="#984B27" stroke-width="0.7"/>
+<text x="146.5" y="115.51978721" text-anchor="middle" class="value">62.20</text>
+<text x="183.5" y="101.30301275" text-anchor="middle" class="value">68.87</text>
+<path d="M131 90.29901275 V85.29901275 H199 V90.29901275" fill="none" stroke="#53616D" stroke-width="0.8"/>
+<text x="165" y="80.29901275" text-anchor="middle" class="gain">+6.67 pp</text>
+<text x="165" y="277" text-anchor="middle" class="label">LIBERO · CPT</text>
+<text x="165" y="293" text-anchor="middle" class="label">NO HEAT vs HEAT</text>
+<rect x="266" y="143.90785632" width="31" height="111.09214367999999" fill="#9AA6B2" stroke="#53616D" stroke-width="0.7"/>
+<rect x="303" y="67.79149479" width="31" height="187.20850521" fill="#D97745" stroke="#984B27" stroke-width="0.7"/>
+<text x="281.5" y="136.90785632" text-anchor="middle" class="value">52.16</text>
+<text x="318.5" y="60.79149479" text-anchor="middle" class="value">87.89</text>
+<path d="M266 49.78749479000001 V44.78749479000001 H334 V49.78749479000001" fill="none" stroke="#53616D" stroke-width="0.8"/>
+<text x="300" y="39.78749479000001" text-anchor="middle" class="gain">+35.74 pp</text>
+<text x="300" y="277" text-anchor="middle" class="label">LIBERO · SFT</text>
+<text x="300" y="293" text-anchor="middle" class="label">NO HEAT vs HEAT</text>
+<rect x="401" y="239.4084" width="31" height="15.5916" fill="#9AA6B2" stroke="#53616D" stroke-width="0.7"/>
+<rect x="438" y="228.0768" width="31" height="26.92320000000001" fill="#D97745" stroke="#984B27" stroke-width="0.7"/>
+<text x="416.5" y="232.4084" text-anchor="middle" class="value">7.32</text>
+<text x="453.5" y="221.0768" text-anchor="middle" class="value">12.64</text>
+<path d="M401 210.0728 V205.0728 H469 V210.0728" fill="none" stroke="#53616D" stroke-width="0.8"/>
+<text x="435" y="200.0728" text-anchor="middle" class="gain">+5.32 pp</text>
+<text x="435" y="277" text-anchor="middle" class="label">MetaWorld · CPT</text>
+<text x="435" y="293" text-anchor="middle" class="label">NO HEAT vs HEAT</text>
+<rect x="536" y="161.4504" width="31" height="93.5496" fill="#9AA6B2" stroke="#53616D" stroke-width="0.7"/>
+<rect x="573" y="138.702" width="31" height="116.298" fill="#D97745" stroke="#984B27" stroke-width="0.7"/>
+<text x="551.5" y="154.4504" text-anchor="middle" class="value">43.92</text>
+<text x="588.5" y="131.702" text-anchor="middle" class="value">54.60</text>
+<path d="M536 120.69799999999998 V115.69799999999998 H604 V120.69799999999998" fill="none" stroke="#53616D" stroke-width="0.8"/>
+<text x="570" y="110.69799999999998" text-anchor="middle" class="gain">+10.68 pp</text>
+<text x="570" y="277" text-anchor="middle" class="label">MetaWorld · SFT</text>
+<text x="570" y="293" text-anchor="middle" class="label">NO HEAT vs HEAT</text>
+</svg>

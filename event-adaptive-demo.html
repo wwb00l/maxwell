@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>动态事件划分 | HEAT</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f7f3;
+      --white: #fff;
+      --ink: #171914;
+      --muted: #6b6e67;
+      --line: #d8dad2;
+      --soft-line: #e9eae5;
+      --dark: #181b17;
+      --dark-2: #242923;
+      --orange: #ef5538;
+      --yellow: #e9c946;
+      --teal: #1d806f;
+      --blue: #2a6dc9;
+      --violet: #7965c5;
+      --event-1: #d9eee8;
+      --event-2: #f7e8b5;
+      --event-3: #f6d1c7;
+      --event-4: #d6e2f4;
+      --event-5: #e4d9f2;
+      --event-6: #d9e8cb;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      letter-spacing: 0;
+    }
+    button, select, input { font: inherit; }
+    button { cursor: pointer; }
+    .shell { width: min(1320px, calc(100% - 56px)); margin: 0 auto; }
+    .topbar {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .topbar strong { color: var(--ink); font-size: 14px; letter-spacing: .02em; }
+    .topbar span { display: inline-flex; align-items: center; gap: 10px; }
+    .mark { width: 23px; height: 23px; display: inline-grid; place-items: center; border: 1px solid var(--ink); color: var(--ink); font-size: 12px; font-weight: 800; }
+    .intro { padding: 60px 0 34px; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr); gap: 48px; align-items: end; }
+    .intro > * { min-width: 0; }
+    .eyebrow { margin: 0 0 14px; color: var(--orange); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+    .eyebrow::before { content: ""; display: inline-block; width: 22px; height: 2px; margin: 0 9px 3px 0; background: currentColor; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(40px, 5.4vw, 78px); line-height: .98; letter-spacing: -.045em; word-break: break-all; }
+    .intro-copy { max-width: 700px; margin: 20px 0 0; color: var(--muted); font-size: 16px; line-height: 1.75; }
+    .intro-note { border-left: 2px solid var(--yellow); padding-left: 17px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .intro-note strong { display: block; margin-bottom: 4px; color: var(--ink); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+
+    .workspace { display: grid; grid-template-columns: minmax(0, 1fr) 252px; gap: 14px; align-items: start; padding-bottom: 18px; }
+    .workspace > * { min-width: 0; }
+    .panel { background: var(--white); border: 1px solid var(--line); }
+    .controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 16px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+    .control-group { display: flex; align-items: center; gap: 10px; }
+    .control-label { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .segmented { display: inline-flex; padding: 2px; border: 1px solid var(--line); background: var(--paper); }
+    .segmented button { min-height: 32px; border: 0; padding: 0 12px; background: transparent; color: var(--muted); font-size: 12px; }
+    .segmented button[aria-pressed="true"] { background: var(--dark); color: var(--white); }
+    .select-wrap { position: relative; }
+    select { height: 34px; border: 1px solid var(--line); border-radius: 0; padding: 0 28px 0 10px; background: var(--paper); color: var(--ink); font-size: 12px; appearance: auto; }
+    .stepper { display: inline-flex; align-items: center; gap: 8px; }
+    input[type="range"] { width: 118px; accent-color: var(--orange); }
+    .range-value { min-width: 30px; color: var(--ink); font-size: 12px; font-variant-numeric: tabular-nums; }
+    .toggle { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; }
+    .toggle input { width: 15px; height: 15px; accent-color: var(--teal); }
+    .transport { display: inline-flex; gap: 7px; }
+    .icon-button { width: 34px; height: 34px; display: inline-grid; place-items: center; border: 1px solid var(--line); background: var(--white); color: var(--ink); font-size: 15px; }
+    .icon-button:hover, .icon-button:focus-visible { border-color: var(--ink); background: var(--paper); }
+    .plot-wrap { min-width: 0; overflow: hidden; padding: 10px 12px 5px; }
+    .plot-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 5px 9px; }
+    .plot-head strong { font-size: 13px; }
+    .plot-head span { color: var(--muted); font-size: 11px; }
+    #timeline { display: block; width: 100%; height: auto; overflow: visible; }
+    #timeline text { font-family: Inter, "Helvetica Neue", Arial, "PingFang SC", sans-serif; fill: var(--muted); font-size: 11px; }
+    #timeline .axis-label { fill: var(--ink); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+    #timeline .event-label { fill: var(--ink); font-size: 11px; font-weight: 750; }
+    #timeline .event-duration { fill: var(--muted); font-size: 10px; }
+    #timeline .gridline { stroke: var(--soft-line); stroke-width: 1; }
+    #timeline .boundary { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 3 4; }
+    #timeline .uniform { stroke: #9a9d95; stroke-width: 1; stroke-dasharray: 2 5; opacity: .75; }
+    #timeline .cursor { stroke: var(--orange); stroke-width: 2; }
+    #timeline .cursor-dot { fill: var(--orange); stroke: var(--white); stroke-width: 2; }
+    .scrubber { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; padding: 8px 5px 2px; color: var(--muted); font-size: 11px; }
+    .scrubber input { width: 100%; }
+    .scrubber strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+    .legend { display: flex; flex-wrap: wrap; gap: 7px 13px; padding: 10px 5px 2px; border-top: 1px solid var(--soft-line); color: var(--muted); font-size: 10px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    .swatch { width: 9px; height: 9px; display: inline-block; }
+    .line-swatch { width: 18px; height: 0; border-top: 2px solid var(--blue); }
+    .dash-swatch { width: 18px; height: 0; border-top: 1px dashed #81847d; }
+    .soft-swatch { width: 18px; height: 8px; background: linear-gradient(90deg, transparent, rgba(239,85,56,.26), transparent); }
+    .side { display: grid; gap: 12px; }
+    .side-card { background: var(--white); border: 1px solid var(--line); }
+    .side-card-head { display: flex; justify-content: space-between; align-items: center; padding: 11px 13px; border-bottom: 1px solid var(--line); }
+    .side-card-head strong { font-size: 13px; }
+    .side-card-head span { color: var(--muted); font-size: 10px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .08em; }
+    .media-frame { position: relative; background: var(--dark); aspect-ratio: 1.22; overflow: hidden; }
+    .media-frame img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .media-frame::after { position: absolute; inset: auto 0 0; height: 44%; background: linear-gradient(transparent, rgba(0,0,0,.65)); content: ""; pointer-events: none; }
+    .media-caption { position: absolute; z-index: 1; right: 12px; bottom: 10px; left: 12px; display: flex; justify-content: space-between; color: #fff; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+    .event-list { padding: 3px 6px 4px; }
+    .event-item { width: 100%; display: grid; grid-template-columns: 27px 1fr auto; align-items: center; gap: 8px; border: 0; border-bottom: 1px solid var(--soft-line); padding: 8px 6px; background: transparent; text-align: left; }
+    .event-item:last-child { border-bottom: 0; }
+    .event-item:hover, .event-item[aria-current="true"] { background: var(--paper); }
+    .event-index { width: 22px; height: 22px; display: grid; place-items: center; color: var(--ink); font-size: 9px; font-weight: 800; }
+    .event-item:nth-child(1) .event-index { background: var(--event-1); }
+    .event-item:nth-child(2) .event-index { background: var(--event-2); }
+    .event-item:nth-child(3) .event-index { background: var(--event-3); }
+    .event-item:nth-child(4) .event-index { background: var(--event-4); }
+    .event-item:nth-child(5) .event-index { background: var(--event-5); }
+    .event-item:nth-child(6) .event-index { background: var(--event-6); }
+    .event-name { display: block; color: var(--ink); font-size: 11px; font-weight: 700; }
+    .event-detail { display: block; margin-top: 2px; color: var(--muted); font-size: 9px; }
+    .event-frames { color: var(--ink); font-size: 10px; font-variant-numeric: tabular-nums; }
+    .footnote { padding: 16px 0 54px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; line-height: 1.6; }
+    .footnote strong { color: var(--ink); }
+    body.embed-mode .topbar, body.embed-mode .intro, body.embed-mode .footnote { display: none; }
+    body.embed-mode main.shell { width: 100%; max-width: none; }
+    body.embed-mode .workspace { padding: 0; }
+    body.embed-mode .panel { border-left: 0; border-right: 0; }
+    @media (max-width: 940px) {
+      .intro { grid-template-columns: 1fr; gap: 22px; padding-top: 44px; }
+      .workspace { grid-template-columns: 1fr; }
+      .side { grid-template-columns: minmax(0, 1fr); align-items: start; }
+    }
+    @media (max-width: 620px) {
+      .shell { width: calc(100% - 28px); max-width: 1320px; }
+      .topbar { min-height: 56px; }
+      .topbar span { display: none; }
+      .intro { padding: 36px 0 26px; }
+      h1 { max-width: 100%; font-size: 36px; line-height: 1.05; white-space: normal; overflow-wrap: anywhere; }
+      .intro-copy { max-width: 100%; font-size: 14px; word-break: break-all; }
+      .intro-copy, .intro-note { overflow-wrap: anywhere; word-break: break-word; }
+      .controls { align-items: stretch; flex-direction: column; }
+      .control-group { width: 100%; justify-content: space-between; min-width: 0; }
+      .control-group:first-child { align-items: stretch; flex-direction: column; gap: 6px; }
+      .control-group:first-child select { width: 100%; max-width: 100%; }
+      .segmented { width: 100%; }
+      .stepper { flex: 1; }
+      .stepper input[type="range"] { flex: 1; width: auto; }
+      #timeline { max-width: 100%; }
+      .segmented { flex: 1; }
+      .segmented button { flex: 1; }
+      .plot-wrap { padding: 10px 8px 6px; }
+      .side { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar shell"><strong><span class="mark">M</span> MAXWELL / HEAT</strong><span>STANDALONE INTERACTIVE PROTOTYPE</span></header>
+  <main class="shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">EVENT-ADAPTIVE TEMPORAL STRUCTURE</p>
+        <h1>让动作边界，<br>跟着变化发生。</h1>
+        <p class="intro-copy">同一段 48 帧动作，在动态事件划分下会被压缩成少量可变时长事件。拖动时间轴，观察模型如何在接近、接触、搬运和放置之间重新分配时间分辨率。</p>
+      </div>
+      <div class="intro-note"><strong>HEAT 的核心直觉</strong>稳定运动可以被更长的事件表示；接触和转换处的高动作变化，则需要更短的边界来保留控制细节。</div>
+    </section>
+
+    <section class="workspace" aria-label="动态事件划分交互演示">
+      <div class="panel">
+        <div class="controls">
+          <div class="control-group"><span class="control-label" data-i18n="segmentLabel">分段方式</span><div class="segmented" role="group" aria-label="分段方式" data-i18n-attr="segmentLabel"><button type="button" data-mode="adaptive" aria-pressed="true" data-i18n="adaptiveMode">动态分段</button><button type="button" data-mode="uniform" aria-pressed="false" data-i18n="uniformMode">等长分段</button></div></div>
+          <div class="control-group"><span class="control-label" data-i18n="eventCountLabel">事件数</span><div class="stepper"><input id="eventCount" type="range" min="3" max="6" value="4" step="1" aria-label="事件数量"><span class="range-value"><strong id="eventCountValue">4</strong> <span data-i18n="countUnit">个</span></span></div></div>
+          <label class="toggle"><input id="softMask" type="checkbox" checked> <span data-i18n="softWeight">显示软权重</span></label>
+          <div class="transport"><button class="icon-button" id="playButton" type="button" title="播放 / 暂停" aria-label="播放">▶</button><button class="icon-button" id="resetButton" type="button" title="回到起点" aria-label="回到起点">↺</button></div>
+        </div>
+        <div class="plot-wrap">
+          <div class="plot-head"><strong id="plotTitle" data-i18n="plotTitle">动作轨迹与事件边界</strong><span id="modeReadout">动态边界 · 硬分配 + 软权重</span></div>
+          <svg id="timeline" viewBox="0 0 960 420" role="img" aria-labelledby="plotTitle"></svg>
+          <div class="scrubber"><span>t = 1</span><input id="frameSlider" type="range" min="0" max="47" value="0" aria-label="当前帧"><strong id="frameReadout">01 / 48</strong></div>
+          <div class="legend"><span><i class="line-swatch" style="border-color:#2468c9"></i>Δx</span><span><i class="line-swatch" style="border-color:#1d806f"></i>Δy</span><span><i class="line-swatch" style="border-color:#ef5538"></i>Δz</span><span><i class="line-swatch" style="border-color:#7965c5"></i>Rx</span><span><i class="line-swatch" style="border-color:#c38b28"></i>Ry</span><span><i class="line-swatch" style="border-color:#4d8f9d"></i>Rz</span><span><i class="line-swatch" style="border-color:#cf5f80"></i><span data-i18n="gripper">夹爪</span></span><span><i class="dash-swatch"></i><span data-i18n="uniformBoundary">等长参考边界</span></span><span><i class="soft-swatch"></i><span data-i18n="softEventWeight">软事件权重</span></span><span><i class="swatch" style="background:var(--orange)"></i><span data-i18n="currentFrame">当前帧</span></span></div>
+        </div>
+      </div>
+
+      <aside class="side">
+        <article class="side-card">
+          <div class="side-card-head"><strong data-i18n="eventSequence">事件序列</strong><span>CLICK TO INSPECT</span></div>
+          <div class="event-list" id="eventList"></div>
+        </article>
+      </aside>
+    </section>
+    <p class="footnote"><strong>训练时：</strong>前向使用硬事件掩码，梯度通过基于事件中心的软权重回传。 <strong>推理时：</strong>输出离散事件边界与持续时间，再只执行短前缀并重新观察环境。</p>
+  </main>
+  <script>
+    (function () {
+      if (new URLSearchParams(window.location.search).get('embed') === '1') document.body.classList.add('embed-mode');
+      const N = 48;
+      const colors = ['#2468c9', '#1d806f', '#ef5538', '#7965c5', '#c38b28', '#4d8f9d', '#cf5f80'];
+      const eventFills = ['#d9eee8', '#f7e8b5', '#f6d1c7', '#d6e2f4', '#e4d9f2', '#d9e8cb'];
+      const eventNames = ['接近目标', '接触 / 抓取', '抬升与搬运', '对准放置', '释放与回撤', '稳定保持'];
+      const svg = document.getElementById('timeline');
+      const eventList = document.getElementById('eventList');
+      const frameSlider = document.getElementById('frameSlider');
+      const frameReadout = document.getElementById('frameReadout');
+      const eventCount = document.getElementById('eventCount');
+      const eventCountValue = document.getElementById('eventCountValue');
+      const softMask = document.getElementById('softMask');
+      const modeReadout = document.getElementById('modeReadout');
+      let mode = 'adaptive';
+      let currentFrame = 0;
+      let timer = null;
+      let language = 'zh';
+      const copy = {
+        zh: { title: '动态事件划分 | HEAT', h1: '让动作边界，', intro: '同一段 48 帧动作，在动态事件划分下会被压缩成少量可变时长事件。拖动时间轴，观察模型如何在接近、接触、搬运和放置之间重新分配时间分辨率。', noteTitle: 'HEAT 的核心直觉', note: '稳定运动可以被更长的事件表示；接触和转换处的高动作变化，则需要更短的边界来保留控制细节。', segmentLabel: '分段方式', adaptiveMode: '动态分段', uniformMode: '等长分段', eventCountLabel: '事件数', countUnit: '个', softWeight: '显示软权重', plotTitle: '动作轨迹与事件边界', adaptiveReadout: '动态边界 · 硬分配', adaptiveSoftReadout: '动态边界 · 硬分配 + 软权重', uniformReadout: '等长边界 · 固定时长', eventSequence: '事件序列', gripper: '夹爪', uniformBoundary: '等长参考边界', softEventWeight: '软事件权重', currentFrame: '当前帧', action: 'ACTION', change: 'CHANGE', timeFrame: 'TIME / FRAME', frames: '帧', eventNames: ['接近目标', '接触 / 抓取', '抬升与搬运', '对准放置', '释放与回撤', '稳定保持'] },
+        en: { title: 'Event-Adaptive Segmentation | HEAT', h1: 'Let action boundaries', intro: 'The same 48-frame action is compressed into a small set of variable-duration events. Drag the timeline to see how temporal resolution is reallocated across approach, contact, transport, and placement.', noteTitle: 'HEAT intuition', note: 'Steady motion can be represented by longer events; high action changes at contact and transitions need shorter boundaries to preserve control detail.', segmentLabel: 'Segmentation', adaptiveMode: 'Adaptive', uniformMode: 'Uniform', eventCountLabel: 'Events', countUnit: '', softWeight: 'Show soft weights', plotTitle: 'Action trajectories & event boundaries', adaptiveReadout: 'Adaptive boundaries · hard assignment', adaptiveSoftReadout: 'Adaptive boundaries · hard assignment + soft weights', uniformReadout: 'Uniform boundaries · fixed duration', eventSequence: 'Event sequence', gripper: 'Gripper', uniformBoundary: 'Uniform reference boundaries', softEventWeight: 'Soft event weights', currentFrame: 'Current frame', action: 'ACTION', change: 'CHANGE', timeFrame: 'TIME / FRAME', frames: 'frames', eventNames: ['Approach target', 'Contact / grasp', 'Lift & transport', 'Align & place', 'Release & retract', 'Stable hold'] },
+      };
+      function applyLanguage(nextLanguage) {
+        language = nextLanguage === 'en' ? 'en' : 'zh';
+        const t = copy[language];
+        document.title = t.title;
+        document.querySelector('.intro h1').innerHTML = language === 'en' ? 'Let action boundaries<br>follow change.' : '让动作边界，<br>跟着变化发生。';
+        document.querySelector('.intro-copy').textContent = t.intro;
+        document.querySelector('.intro-note strong').textContent = t.noteTitle;
+        document.querySelector('.intro-note').lastChild.textContent = t.note;
+        document.querySelectorAll('[data-i18n]').forEach((node) => { if (t[node.dataset.i18n]) node.textContent = t[node.dataset.i18n]; });
+        document.querySelector('.segmented')?.setAttribute('aria-label', t.segmentLabel);
+        document.getElementById('eventCount')?.setAttribute('aria-label', t.eventCountLabel);
+        document.getElementById('frameSlider')?.setAttribute('aria-label', t.currentFrame);
+        document.getElementById('playButton')?.setAttribute('aria-label', language === 'en' ? 'Play / pause' : '播放 / 暂停');
+        document.getElementById('resetButton')?.setAttribute('aria-label', language === 'en' ? 'Reset' : '回到起点');
+        render();
+      }
+      window.addEventListener('message', (event) => { if (event.data?.type === 'heat-demo-language') applyLanguage(event.data.language); });
+
+      function notifyParentHeight() {
+        if (window.parent !== window) window.parent.postMessage({ type: 'heat-demo-height', height: Math.max(650, document.documentElement.scrollHeight - 10) }, '*');
+      }
+
+      function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+      function buildData(kind) {
+        const out = Array.from({ length: 7 }, () => []);
+        for (let t = 0; t < N; t += 1) {
+          const x = t / (N - 1);
+          const phase = kind === 'cup' ? [0.02, 0.24, 0.42, 0.58, 0.76] : [0.02, 0.18, 0.35, 0.52, 0.7, 0.86];
+          const p = x < phase[1] ? x * 2.2 : x < phase[2] ? .52 + (x - phase[1]) * 1.6 : x < phase[3] ? .81 - (x - phase[2]) * 2.5 : x < phase[4] ? .4 + (x - phase[3]) * 2.3 : .79;
+          out[0].push(clamp(p + .035 * Math.sin(t * .42), 0, 1));
+          out[1].push(clamp(.14 + .36 * Math.sin(x * 4.7 + .5) + (x > .45 ? .22 : 0), 0, 1));
+          out[2].push(clamp(.22 + .44 * Math.max(0, Math.sin((x - .18) * 5.4)) + .04 * Math.sin(t), 0, 1));
+          out[3].push(clamp(.52 + .22 * Math.sin(x * 3.6 - 1.2), 0, 1));
+          out[4].push(clamp(.43 + .2 * Math.cos(x * 5.1) + (x > .56 ? -.16 : 0), 0, 1));
+          out[5].push(clamp(.48 + .16 * Math.sin(x * 7.2 + 2), 0, 1));
+          out[6].push(kind === 'cup' ? (x > .38 && x < .79 ? .84 : .12) : (x > .31 && x < .69 ? .9 : .1));
+        }
+        return out;
+      }
+      function changeScores(data) {
+        return Array.from({ length: N }, (_, t) => {
+          if (t === 0) return .15;
+          let total = 0;
+          for (let d = 0; d < data.length; d += 1) total += Math.abs(data[d][t] - data[d][t - 1]);
+          return total / data.length;
+        });
+      }
+      function pickBoundaries(scores, count) {
+        const candidates = [];
+        for (let t = 3; t < N - 3; t += 1) {
+          const peak = scores[t] >= scores[t - 1] && scores[t] >= scores[t + 1];
+          candidates.push({ t, score: scores[t] + (peak ? .08 : 0) });
+        }
+        candidates.sort((a, b) => b.score - a.score);
+        const minGap = Math.max(3, Math.floor(N / (count * 1.9)));
+        const picked = [];
+        candidates.forEach((candidate) => {
+          if (picked.length >= count - 1) return;
+          if (picked.every((item) => Math.abs(item - candidate.t) >= minGap)) picked.push(candidate.t);
+        });
+        while (picked.length < count - 1) picked.push(Math.round((picked.length + 1) * N / count));
+        return [0].concat(picked.sort((a, b) => a - b)).concat([N]);
+      }
+      function uniformBoundaries(count) {
+        return Array.from({ length: count + 1 }, (_, index) => Math.round(index * N / count));
+      }
+      function pathFor(values, x0, width, y0, height) {
+        return values.map((value, index) => (index ? 'L' : 'M') + (x0 + (index / (N - 1)) * width).toFixed(2) + ',' + (y0 + (1 - value) * height).toFixed(2)).join(' ');
+      }
+      function svgEl(tag, attrs, text) {
+        const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        Object.entries(attrs || {}).forEach(([key, value]) => node.setAttribute(key, value));
+        if (text !== undefined) node.textContent = text;
+        return node;
+      }
+      function render() {
+        const count = Number(eventCount.value);
+        const data = buildData('cup');
+        const scores = changeScores(data);
+        const bounds = mode === 'adaptive' ? pickBoundaries(scores, count) : uniformBoundaries(count);
+        const uniform = uniformBoundaries(count);
+        const x0 = 66, width = 856, top = 34, plotHeight = 184, lowerTop = 254, lowerHeight = 76;
+        svg.replaceChildren();
+        svg.append(svgEl('rect', { x: 0, y: 0, width: 960, height: 430, fill: '#fff' }));
+        bounds.slice(0, -1).forEach((start, i) => {
+          const end = bounds[i + 1];
+          svg.append(svgEl('rect', { x: x0 + start / N * width, y: 24, width: (end - start) / N * width, height: 315, fill: eventFills[i], opacity: '.58' }));
+          const center = x0 + ((start + end) / 2) / N * width;
+          svg.append(svgEl('text', { x: center, y: 16, 'text-anchor': 'middle', class: 'event-label' }, 'E' + (i + 1)));
+          svg.append(svgEl('text', { x: center, y: 28, 'text-anchor': 'middle', class: 'event-duration' }, (end - start) + ' ' + copy[language].frames));
+        });
+        [0, .25, .5, .75, 1].forEach((tick) => {
+          const y = top + (1 - tick) * plotHeight;
+          svg.append(svgEl('line', { x1: x0, x2: x0 + width, y1: y, y2: y, class: 'gridline' }));
+          svg.append(svgEl('text', { x: 56, y: y + 4, 'text-anchor': 'end' }, tick.toFixed(2)));
+        });
+        svg.append(svgEl('text', { x: 8, y: top - 8, class: 'axis-label' }, copy[language].action)); 
+        data.forEach((values, index) => svg.append(svgEl('path', { d: pathFor(values, x0, width, top, plotHeight), fill: 'none', stroke: colors[index], 'stroke-width': index === 6 ? 2.6 : 1.5, opacity: index === 6 ? .95 : .78 }))); 
+        svg.append(svgEl('text', { x: 8, y: lowerTop - 10, class: 'axis-label' }, copy[language].change)); 
+        const maxScore = Math.max.apply(null, scores) || 1;
+        scores.forEach((score, index) => {
+          const barWidth = width / N - 2;
+          const height = score / maxScore * lowerHeight;
+          svg.append(svgEl('rect', { x: x0 + index / N * width + 1, y: lowerTop + lowerHeight - height, width: barWidth, height, fill: index === currentFrame ? '#ef5538' : '#b8cbc5', opacity: index === currentFrame ? 1 : .72 }));
+        });
+        svg.append(svgEl('path', { d: pathFor(data[6], x0, width, lowerTop, lowerHeight), fill: 'none', stroke: '#ef5538', 'stroke-width': 2, opacity: '.9' }));
+        uniform.slice(1, -1).forEach((point) => {
+          const x = x0 + point / N * width;
+          svg.append(svgEl('line', { x1: x, x2: x, y1: 24, y2: lowerTop + lowerHeight, class: 'uniform' }));
+        });
+        bounds.slice(1, -1).forEach((point) => {
+          const x = x0 + point / N * width;
+          svg.append(svgEl('line', { x1: x, x2: x, y1: 24, y2: lowerTop + lowerHeight, class: 'boundary' }));
+        });
+        if (softMask.checked && mode === 'adaptive') {
+          bounds.slice(0, -1).forEach((start, i) => {
+            const end = bounds[i + 1];
+            const center = (start + end) / 2;
+            const spread = Math.max(2, (end - start) * .7);
+            const left = x0 + Math.max(0, center - spread) / N * width;
+            const right = x0 + Math.min(N, center + spread) / N * width;
+            svg.append(svgEl('rect', { x: left, y: top, width: right - left, height: plotHeight, fill: '#ef5538', opacity: '.035' }));
+          });
+        }
+        const cursorX = x0 + currentFrame / (N - 1) * width;
+        svg.append(svgEl('line', { x1: cursorX, x2: cursorX, y1: 8, y2: lowerTop + lowerHeight + 5, class: 'cursor' }));
+        svg.append(svgEl('circle', { cx: cursorX, cy: top + (1 - data[0][currentFrame]) * plotHeight, r: 5, class: 'cursor-dot' }));
+        svg.append(svgEl('text', { x: x0, y: 365 }, '1'));
+        svg.append(svgEl('text', { x: x0 + width, y: 365, 'text-anchor': 'end' }, String(N)));
+        svg.append(svgEl('text', { x: x0 + width / 2, y: 388, 'text-anchor': 'middle', class: 'axis-label' }, copy[language].timeFrame));
+        eventCountValue.textContent = count;
+        modeReadout.textContent = mode === 'adaptive' ? (softMask.checked ? copy[language].adaptiveSoftReadout : copy[language].adaptiveReadout) : copy[language].uniformReadout;
+        frameReadout.textContent = String(currentFrame + 1).padStart(2, '0') + ' / ' + N;
+        const durations = bounds.slice(1).map((end, index) => end - bounds[index]);
+        renderEvents(bounds, durations);
+        notifyParentHeight();
+      }
+      function renderEvents(bounds, durations) {
+        eventList.replaceChildren();
+        durations.forEach((duration, index) => {
+          const item = document.createElement('button');
+          item.type = 'button'; item.className = 'event-item'; item.setAttribute('aria-current', currentFrame >= bounds[index] && currentFrame < bounds[index + 1] ? 'true' : 'false');
+          item.innerHTML = '<span class="event-index">E' + (index + 1) + '</span><span><span class="event-name">' + (copy[language].eventNames[index] || (language === 'en' ? 'Action phase' : '动作阶段')) + '</span><span class="event-detail">' + (language === 'en' ? 'Frames ' : '帧 ') + (bounds[index] + 1) + ' - ' + bounds[index + 1] + '</span></span><span class="event-frames">' + duration + 'F</span>';
+          item.addEventListener('click', () => { currentFrame = Math.min(N - 1, bounds[index] + Math.floor(duration / 2)); frameSlider.value = currentFrame; render(); });
+          eventList.append(item);
+        });
+      }
+      document.querySelectorAll('[data-mode]').forEach((button) => button.addEventListener('click', () => { mode = button.dataset.mode; document.querySelectorAll('[data-mode]').forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button))); render(); }));
+      eventCount.addEventListener('input', render);
+      softMask.addEventListener('change', render);
+      frameSlider.addEventListener('input', () => { currentFrame = Number(frameSlider.value); render(); });
+      document.getElementById('resetButton').addEventListener('click', () => { currentFrame = 0; frameSlider.value = 0; render(); });
+      document.getElementById('playButton').addEventListener('click', (event) => {
+        if (timer) { clearInterval(timer); timer = null; event.currentTarget.textContent = '▶'; event.currentTarget.setAttribute('aria-label', '播放'); return; }
+        event.currentTarget.textContent = 'Ⅱ'; event.currentTarget.setAttribute('aria-label', '暂停');
+        timer = setInterval(() => { currentFrame = currentFrame >= N - 1 ? 0 : currentFrame + 1; frameSlider.value = currentFrame; render(); }, 110);
+      });
+      render();
+      window.addEventListener('resize', notifyParentHeight);
+    }());
+  </script>
+</body>
+</html>

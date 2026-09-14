@@ -1,0 +1,741 @@
+[
+  {
+    "random_seed": 20260913,
+    "policy": "Easy zero-reward proportional random sampling"
+  },
+  {
+    "group": "Easy",
+    "episode_index": 251,
+    "task_name": "button-press-topdown-wall-v3",
+    "max_reward": 0.0,
+    "mean_reward": 0.0
+  },
+  {
+    "group": "Easy",
+    "episode_index": 280,
+    "task_name": "button-press-topdown-wall-v3",
+    "max_reward": 0.0,
+    "mean_reward": 0.0
+  },
+  {
+    "group": "Easy",
+    "episode_index": 305,
+    "task_name": "button-press-v3",
+    "max_reward": 1.4957366158983927,
+    "mean_reward": 0.6851288325309203
+  },
+  {
+    "group": "Easy",
+    "episode_index": 310,
+    "task_name": "button-press-v3",
+    "max_reward": 1.4894783300619305,
+    "mean_reward": 0.6610509926051649
+  },
+  {
+    "group": "Easy",
+    "episode_index": 328,
+    "task_name": "button-press-v3",
+    "max_reward": 1.5178140505652211,
+    "mean_reward": 0.6875050158051993
+  },
+  {
+    "group": "Easy",
+    "episode_index": 347,
+    "task_name": "button-press-v3",
+    "max_reward": 1.4978287663809842,
+    "mean_reward": 0.6599388874400857
+  },
+  {
+    "group": "Easy",
+    "episode_index": 400,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3532366868262664,
+    "mean_reward": 0.5939060706417632
+  },
+  {
+    "group": "Easy",
+    "episode_index": 401,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3623306315558907,
+    "mean_reward": 0.6035161702746402
+  },
+  {
+    "group": "Easy",
+    "episode_index": 402,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2665303143849092,
+    "mean_reward": 0.5867044526233138
+  },
+  {
+    "group": "Easy",
+    "episode_index": 403,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2874213808506507,
+    "mean_reward": 0.5910390277177993
+  },
+  {
+    "group": "Easy",
+    "episode_index": 404,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3767954519990728,
+    "mean_reward": 0.6096754131180675
+  },
+  {
+    "group": "Easy",
+    "episode_index": 405,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.0995747065271089,
+    "mean_reward": 0.5468158620032967
+  },
+  {
+    "group": "Easy",
+    "episode_index": 406,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1739348093518105,
+    "mean_reward": 0.5651398256320858
+  },
+  {
+    "group": "Easy",
+    "episode_index": 407,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1898378903423565,
+    "mean_reward": 0.5809813997308195
+  },
+  {
+    "group": "Easy",
+    "episode_index": 408,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1372486586279154,
+    "mean_reward": 0.559908139089721
+  },
+  {
+    "group": "Easy",
+    "episode_index": 409,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2879300831784097,
+    "mean_reward": 0.5885354396469896
+  },
+  {
+    "group": "Easy",
+    "episode_index": 410,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1004839590692483,
+    "mean_reward": 0.5540608888955675
+  },
+  {
+    "group": "Easy",
+    "episode_index": 411,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1052433836186457,
+    "mean_reward": 0.5504066326559477
+  },
+  {
+    "group": "Easy",
+    "episode_index": 412,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.169492800486419,
+    "mean_reward": 0.5689770265553802
+  },
+  {
+    "group": "Easy",
+    "episode_index": 413,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.376060469396803,
+    "mean_reward": 0.6076462505520568
+  },
+  {
+    "group": "Easy",
+    "episode_index": 414,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2852788891983957,
+    "mean_reward": 0.5946425733721311
+  },
+  {
+    "group": "Easy",
+    "episode_index": 415,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3097348359129712,
+    "mean_reward": 0.6119185757457182
+  },
+  {
+    "group": "Easy",
+    "episode_index": 416,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.378931410683696,
+    "mean_reward": 0.6337801720348658
+  },
+  {
+    "group": "Easy",
+    "episode_index": 417,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2503433034216895,
+    "mean_reward": 0.5800169136743586
+  },
+  {
+    "group": "Easy",
+    "episode_index": 418,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2221406461972701,
+    "mean_reward": 0.5766371837258188
+  },
+  {
+    "group": "Easy",
+    "episode_index": 419,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3489133777640399,
+    "mean_reward": 0.5941776936039963
+  },
+  {
+    "group": "Easy",
+    "episode_index": 420,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.250001473267699,
+    "mean_reward": 0.5895449216674629
+  },
+  {
+    "group": "Easy",
+    "episode_index": 421,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3128113413183962,
+    "mean_reward": 0.6048562543792576
+  },
+  {
+    "group": "Easy",
+    "episode_index": 422,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.192826193396015,
+    "mean_reward": 0.5826208577647892
+  },
+  {
+    "group": "Easy",
+    "episode_index": 423,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2834617037968212,
+    "mean_reward": 0.5975763122173189
+  },
+  {
+    "group": "Easy",
+    "episode_index": 424,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.218125814371413,
+    "mean_reward": 0.570980433653879
+  },
+  {
+    "group": "Easy",
+    "episode_index": 425,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3208616853212731,
+    "mean_reward": 0.587175485455408
+  },
+  {
+    "group": "Easy",
+    "episode_index": 426,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1615811943030285,
+    "mean_reward": 0.5696579321908668
+  },
+  {
+    "group": "Easy",
+    "episode_index": 427,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1278843324162509,
+    "mean_reward": 0.5501575223996842
+  },
+  {
+    "group": "Easy",
+    "episode_index": 428,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2026899796270865,
+    "mean_reward": 0.5717896733919303
+  },
+  {
+    "group": "Easy",
+    "episode_index": 429,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.199687642775166,
+    "mean_reward": 0.5737827145091008
+  },
+  {
+    "group": "Easy",
+    "episode_index": 430,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3633446575659187,
+    "mean_reward": 0.6156111256280646
+  },
+  {
+    "group": "Easy",
+    "episode_index": 431,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.204956959290738,
+    "mean_reward": 0.5718012995353675
+  },
+  {
+    "group": "Easy",
+    "episode_index": 432,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1133153883289908,
+    "mean_reward": 0.5508467219390017
+  },
+  {
+    "group": "Easy",
+    "episode_index": 433,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1503574122615472,
+    "mean_reward": 0.5745707360168695
+  },
+  {
+    "group": "Easy",
+    "episode_index": 434,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2160604673574307,
+    "mean_reward": 0.5712225011529606
+  },
+  {
+    "group": "Easy",
+    "episode_index": 435,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.4034149375769602,
+    "mean_reward": 0.6041603175655071
+  },
+  {
+    "group": "Easy",
+    "episode_index": 436,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2087974495660263,
+    "mean_reward": 0.5683157094480463
+  },
+  {
+    "group": "Easy",
+    "episode_index": 437,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2496827999085744,
+    "mean_reward": 0.5995548128509455
+  },
+  {
+    "group": "Easy",
+    "episode_index": 438,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1059410537223893,
+    "mean_reward": 0.5548707548971392
+  },
+  {
+    "group": "Easy",
+    "episode_index": 439,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1624814936701813,
+    "mean_reward": 0.5721231059198713
+  },
+  {
+    "group": "Easy",
+    "episode_index": 440,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1858061695781896,
+    "mean_reward": 0.5746396449266492
+  },
+  {
+    "group": "Easy",
+    "episode_index": 441,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2697572354685747,
+    "mean_reward": 0.5688957169297072
+  },
+  {
+    "group": "Easy",
+    "episode_index": 442,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.370160472648918,
+    "mean_reward": 0.5943577141552877
+  },
+  {
+    "group": "Easy",
+    "episode_index": 443,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3222156104732554,
+    "mean_reward": 0.5831554046846686
+  },
+  {
+    "group": "Easy",
+    "episode_index": 444,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2112499881831134,
+    "mean_reward": 0.5616299406302657
+  },
+  {
+    "group": "Easy",
+    "episode_index": 445,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.231353198005225,
+    "mean_reward": 0.5714245138493211
+  },
+  {
+    "group": "Easy",
+    "episode_index": 446,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.3512213103355402,
+    "mean_reward": 0.5977011154160312
+  },
+  {
+    "group": "Easy",
+    "episode_index": 447,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.2511655572103044,
+    "mean_reward": 0.5905962515868645
+  },
+  {
+    "group": "Easy",
+    "episode_index": 448,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.175565078136064,
+    "mean_reward": 0.5537091827028124
+  },
+  {
+    "group": "Easy",
+    "episode_index": 449,
+    "task_name": "coffee-button-v3",
+    "max_reward": 1.1656547561327217,
+    "mean_reward": 0.5627780930846636
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1808,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.125,
+    "mean_reward": 0.3337815101039559
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1811,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.121236801147461,
+    "mean_reward": 0.3887478053874994
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1815,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.1247382164001465,
+    "mean_reward": 0.3082333879765106
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1818,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.125,
+    "mean_reward": 0.5489460119865409
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1819,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 0.7800185871013635,
+    "mean_reward": 0.2872417364312718
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1826,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.1014710664749146,
+    "mean_reward": 0.5191455282753755
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1831,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.1236318349838257,
+    "mean_reward": 0.2760586830225214
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1836,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.125,
+    "mean_reward": 0.5269929819557287
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1840,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.124995231628418,
+    "mean_reward": 0.5602595953122557
+  },
+  {
+    "group": "Easy",
+    "episode_index": 1842,
+    "task_name": "peg-unplug-side-v3",
+    "max_reward": 1.125,
+    "mean_reward": 0.5386347691194896
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2103,
+    "task_name": "push-back-v3",
+    "max_reward": 0.3875319680837103,
+    "mean_reward": 0.0698786254858247
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2106,
+    "task_name": "push-back-v3",
+    "max_reward": 0.43406509221589556,
+    "mean_reward": 0.08560859348355288
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2108,
+    "task_name": "push-back-v3",
+    "max_reward": 0.44582013256479025,
+    "mean_reward": 0.08011006703444216
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2109,
+    "task_name": "push-back-v3",
+    "max_reward": 0.42826912233714587,
+    "mean_reward": 0.08323922769159393
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2125,
+    "task_name": "push-back-v3",
+    "max_reward": 0.3625497808892207,
+    "mean_reward": 0.09383234990502845
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2128,
+    "task_name": "push-back-v3",
+    "max_reward": 0.5437169815496014,
+    "mean_reward": 0.1383591436657853
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2131,
+    "task_name": "push-back-v3",
+    "max_reward": 0.4926084837896341,
+    "mean_reward": 0.09703768553018738
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2134,
+    "task_name": "push-back-v3",
+    "max_reward": 0.3867215336318845,
+    "mean_reward": 0.08492025598487396
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2139,
+    "task_name": "push-back-v3",
+    "max_reward": 0.43443930696472666,
+    "mean_reward": 0.12923368575052127
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2140,
+    "task_name": "push-back-v3",
+    "max_reward": 0.3932352975568646,
+    "mean_reward": 0.08132517482882483
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2141,
+    "task_name": "push-back-v3",
+    "max_reward": 0.5553602109855582,
+    "mean_reward": 0.09252170156604472
+  },
+  {
+    "group": "Hard",
+    "episode_index": 2142,
+    "task_name": "push-back-v3",
+    "max_reward": 0.31439538151447516,
+    "mean_reward": 0.07955557451788743
+  },
+  {
+    "group": "Medium",
+    "episode_index": 154,
+    "task_name": "box-close-v3",
+    "max_reward": 3.9175396660035573,
+    "mean_reward": 1.0382887823130729
+  },
+  {
+    "group": "Medium",
+    "episode_index": 156,
+    "task_name": "box-close-v3",
+    "max_reward": 1.4745802081187043,
+    "mean_reward": 0.18698915639926628
+  },
+  {
+    "group": "Medium",
+    "episode_index": 160,
+    "task_name": "box-close-v3",
+    "max_reward": 4.197422274477284,
+    "mean_reward": 1.1350650057220077
+  },
+  {
+    "group": "Medium",
+    "episode_index": 170,
+    "task_name": "box-close-v3",
+    "max_reward": 3.9714414145368635,
+    "mean_reward": 1.0322670957206832
+  },
+  {
+    "group": "Medium",
+    "episode_index": 498,
+    "task_name": "coffee-pull-v3",
+    "max_reward": 4.559145927429199,
+    "mean_reward": 0.8478145042300782
+  },
+  {
+    "group": "Medium",
+    "episode_index": 499,
+    "task_name": "coffee-pull-v3",
+    "max_reward": 4.489344120025635,
+    "mean_reward": 0.7801974281310177
+  },
+  {
+    "group": "Medium",
+    "episode_index": 529,
+    "task_name": "coffee-push-v3",
+    "max_reward": 4.375555038452148,
+    "mean_reward": 0.6850779729940487
+  },
+  {
+    "group": "Medium",
+    "episode_index": 544,
+    "task_name": "coffee-push-v3",
+    "max_reward": 4.312884330749512,
+    "mean_reward": 0.6506443673094024
+  },
+  {
+    "group": "Medium",
+    "episode_index": 1850,
+    "task_name": "soccer-v3",
+    "max_reward": 4.136286669662621,
+    "mean_reward": 0.5206906668504958
+  },
+  {
+    "group": "Medium",
+    "episode_index": 1856,
+    "task_name": "soccer-v3",
+    "max_reward": 3.0168759275390107,
+    "mean_reward": 0.5564233121380906
+  },
+  {
+    "group": "Medium",
+    "episode_index": 1858,
+    "task_name": "soccer-v3",
+    "max_reward": 2.38762102210697,
+    "mean_reward": 0.64248436102422
+  },
+  {
+    "group": "Medium",
+    "episode_index": 1866,
+    "task_name": "soccer-v3",
+    "max_reward": 3.8608533412013277,
+    "mean_reward": 0.7598760589731121
+  },
+  {
+    "group": "Medium",
+    "episode_index": 1877,
+    "task_name": "soccer-v3",
+    "max_reward": 3.6245570307545947,
+    "mean_reward": 0.6438104634959864
+  },
+  {
+    "group": "Medium",
+    "episode_index": 1897,
+    "task_name": "soccer-v3",
+    "max_reward": 2.177898895362961,
+    "mean_reward": 0.4825958486818569
+  },
+  {
+    "group": "Medium",
+    "episode_index": 1898,
+    "task_name": "soccer-v3",
+    "max_reward": 3.4245972569145033,
+    "mean_reward": 0.8047092396649052
+  },
+  {
+    "group": "Medium",
+    "episode_index": 1899,
+    "task_name": "soccer-v3",
+    "max_reward": 3.8824836243252214,
+    "mean_reward": 0.5585933062637934
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2251,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.9366292100870295,
+    "mean_reward": 1.8012647801623627
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2256,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.911484130177905,
+    "mean_reward": 1.7589384131027623
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2260,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.8966840193408165,
+    "mean_reward": 1.6947146937848097
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2272,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.940915042103563,
+    "mean_reward": 1.880477922110798
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2277,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.934564551144304,
+    "mean_reward": 1.8768776414602186
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2278,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.916334712268321,
+    "mean_reward": 1.6978078534622705
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2287,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.9041056686869,
+    "mean_reward": 1.7448184985944228
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2289,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.942594785888854,
+    "mean_reward": 1.7765587443608766
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2291,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.9125326046056665,
+    "mean_reward": 1.772581817441946
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2295,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.9187612049984555,
+    "mean_reward": 1.6811683747854274
+  },
+  {
+    "group": "Very Hard",
+    "episode_index": 2298,
+    "task_name": "shelf-place-v3",
+    "max_reward": 5.94495192295349,
+    "mean_reward": 1.8118267075944308
+  }
+]

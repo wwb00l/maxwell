@@ -90,6 +90,8 @@ const textTranslations = new Map([
   ["绝对增益", "Absolute gain"],
   ["最大绝对增益", "Largest absolute gain"],
   ["HEAT / No HEAT 匹配消融。这里的 HEAT 表示启用 Continuous-HEAT 事件条件，No HEAT 表示关闭事件通路；结果来自论文所列的单次种子 rollout 评测。", "Matched HEAT / No HEAT ablation. HEAT enables Continuous-HEAT event conditioning, while No HEAT disables the event pathway. Results are from the single-seed rollout evaluation reported in the paper."],
+  ["MetaWorld 公开榜单截图。", "Screenshot of the public MetaWorld leaderboard."],
+  ["MetaWorld 公开榜单截图", "Public MetaWorld leaderboard screenshot"],
   ["10 项任务平均", "10-task average"],
   ["4 项任务平均", "4-task average"],
   ["3 项任务平均", "3-task average"],
